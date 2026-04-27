@@ -1,0 +1,7 @@
+#citus_distributed_node_config
+#ip port
+host.docker.internal 5434
+host.docker.internal 5435
+host.docker.internal 5436
+host.docker.internal 5437
+host.docker.internal 5438

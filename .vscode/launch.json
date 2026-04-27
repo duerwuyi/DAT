@@ -1,0 +1,125 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "citus_test",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/main/citus",
+      "program": "citus_test.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug distranger-citus",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/distranger",
+      "args": [
+        "main/citus/citus_ddc_config.txt"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "Debug distranger-citus-eval",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/distranger",
+      "args": [
+        "main/citus/citus_random_config.txt"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "Debug distranger-ss",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/distranger",
+      "args": [
+        "main/shardingsphere/ss_ddc_config.txt"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+        {
+      "name": "Debug distranger-tidb",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/distranger",
+      "args": [
+        "main/tidb/tidb_ddc_config.txt"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "Debug distranger-vitess",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/distranger",
+      "args": [
+        "main/vitess/vitess_ddc_config.txt"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "Debug python feedback",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/feedback/feedback.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

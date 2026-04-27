@@ -1,0 +1,7 @@
+#shardingsphere_node_config
+#ip port user password
+host.docker.internal 5443 postgres 123abc
+host.docker.internal 5444 postgres 123abc
+host.docker.internal 5445 postgres 123abc
+host.docker.internal 5446 postgres 123abc
+host.docker.internal 5447 postgres 123abc

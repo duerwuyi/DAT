@@ -1,0 +1,7 @@
+ndb-db0=testdb
+ndb-ip0=host.docker.internal
+ndb-port0=3306
+ndb-db1=testdb
+ndb-ip1=host.docker.internal
+ndb-port1=3307
+ddc=true

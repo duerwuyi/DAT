@@ -1,0 +1,1 @@
+docker run -d --name clickhouse-single   --ulimit nofile=262144:262144   -p 127.0.0.1:8127:8123   -p 127.0.0.1:9007:9000   -e CLICKHOUSE_USER=default   -e CLICKHOUSE_PASSWORD=   -v "$PWD/ch_single/users.d/users.xml:/etc/clickhouse-server/users.d/users.xml:ro"   clickhouse/clickhouse-server:latest

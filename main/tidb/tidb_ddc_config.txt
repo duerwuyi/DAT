@@ -1,0 +1,6 @@
+mysql-db=testdb
+mysql-ip0=host.docker.internal
+mysql-port0=4001
+tidb-ip1=host.docker.internal
+tidb-port1=4000
+ddc=true

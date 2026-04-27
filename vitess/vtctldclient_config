@@ -1,0 +1,2 @@
+distributed host.docker.internal 25999
+single host.docker.internal 15999

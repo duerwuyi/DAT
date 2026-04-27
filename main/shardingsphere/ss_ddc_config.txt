@@ -1,0 +1,6 @@
+postgres-db=testdb
+postgres-ip0=host.docker.internal
+postgres-port0=5432
+shardingsphere-ip1=host.docker.internal
+shardingsphere-port1=5440
+ddc=true

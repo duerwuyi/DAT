@@ -1,0 +1,6 @@
+clickhouse-db=testdb
+clickhouse-ip0=host.docker.internal
+clickhouse-port0=9007
+clickhouse-ip1=host.docker.internal
+clickhouse-port1=9000
+ddc=true

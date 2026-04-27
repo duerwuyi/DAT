@@ -1,0 +1,7 @@
+vitess-db0=local
+vitess-ip0=host.docker.internal
+vitess-port0=15306
+vitess-db1=sharded
+vitess-ip1=host.docker.internal
+vitess-port1=25306
+ddc=true

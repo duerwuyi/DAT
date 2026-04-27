@@ -1,0 +1,6 @@
+postgres-db=testdb
+postgres-ip0=host.docker.internal
+postgres-port0=5432
+citus-ip1=host.docker.internal
+citus-port1=5433
+ddc=true

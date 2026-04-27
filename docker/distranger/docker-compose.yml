@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  fuzzer:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: distranger
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    tty: true
+    stdin_open: true
+    network_mode: host  # optional: allows connecting to same-host containers more easily

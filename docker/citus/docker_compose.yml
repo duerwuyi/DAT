@@ -1,0 +1,78 @@
+# This file is auto generated from it's template,
+# see citusdata/tools/packaging_automation/templates/docker/latest/docker-compose.tmpl.yml.
+version: "3"
+
+services:
+  master:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_master"
+    image: "citusdata/citus:latest"
+    ports: ["5433:5432"]
+    labels: ["com.citusdata.role=Master"]
+    environment: &AUTH
+      POSTGRES_USER: "${POSTGRES_USER:-postgres}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PGUSER: "${POSTGRES_USER:-postgres}"
+      PGPASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+  worker1:
+    container_name: "docker-worker1-1"
+    image: "citusdata/citus:latest"
+    labels: ["com.citusdata.role=Worker"]
+    depends_on: [manager]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    ports: ["5434:5432"]
+  worker2:
+    container_name: "docker-worker2-1"
+    image: "citusdata/citus:latest"
+    labels: ["com.citusdata.role=Worker"]
+    depends_on: [manager]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    ports: ["5435:5432"]
+  worker3:
+    container_name: "docker-worker3-1"
+    image: "citusdata/citus:latest"
+    labels: ["com.citusdata.role=Worker"]
+    depends_on: [manager]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    ports: ["5436:5432"]
+  worker4:
+    container_name: "docker-worker4-1"
+    image: "citusdata/citus:latest"
+    labels: ["com.citusdata.role=Worker"]
+    depends_on: [manager]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    ports: ["5437:5432"]
+  worker5:
+    container_name: "docker-worker5-1"
+    image: "citusdata/citus:latest"
+    labels: ["com.citusdata.role=Worker"]
+    depends_on: [manager]
+    environment: *AUTH
+    command: "/wait-for-manager.sh"
+    volumes:
+      - healthcheck-volume:/healthcheck
+    ports: ["5438:5432"]
+  manager:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_manager"
+    image: "citusdata/membership-manager:0.3.0"
+    volumes:
+      - "${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock"
+      - healthcheck-volume:/healthcheck
+    depends_on: [master]
+    environment: 
+      <<: *AUTH
+      DOCKER_API_VERSION: "1.44"
+volumes:
+  healthcheck-volume:

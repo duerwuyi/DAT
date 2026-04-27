@@ -1,0 +1,59 @@
+
+ARG VITESS_TAG=latest
+FROM vitess/lite:${VITESS_TAG} AS vitess_tools
+
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y \
+        g++ build-essential autoconf autoconf-archive \
+        libboost-regex-dev libpq-dev libpqxx-dev \
+        wget curl git lsb-release gnupg \
+        python3 python3-pip ca-certificates tshark apt-transport-https \
+        software-properties-common gdb libmysqlclient-dev mariadb-client jq
+
+COPY --from=vitess_tools /vt/bin/vtctldclient /usr/local/bin/vtctldclient
+COPY --from=vitess_tools /vt/bin/vtctlclient  /usr/local/bin/vtctlclient
+COPY --from=vitess_tools /vt/bin/mysqlctl     /usr/local/bin/mysqlctl
+
+RUN vtctldclient --help >/dev/null
+
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+    add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) stable" && \
+    apt-get update && \
+    apt-get install -y docker-ce-cli
+
+RUN curl -fsSL 'https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key' | gpg --dearmor -o /usr/share/keyrings/clickhouse-keyring.gpg && \
+    ARCH=$(dpkg --print-architecture) && \
+    echo "deb [signed-by=/usr/share/keyrings/clickhouse-keyring.gpg arch=${ARCH}] https://packages.clickhouse.com/deb stable main" | tee /etc/apt/sources.list.d/clickhouse.list && \
+    apt-get update && \
+    apt-get install -y clickhouse-client
+
+
+RUN wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - && \
+    sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list' && \
+    apt-get update && \
+    apt-get install -y postgresql-client-17 
+RUN pip3 install pandas matplotlib
+
+RUN apt-get install -y nlohmann-json3-dev
+
+RUN version="v23.0" && \
+    url="$(curl -s https://api.github.com/repos/vitessio/vitess/releases | jq --arg version "${version}" -r '[.[] | select(.tag_name | contains($version))] | sort_by(.created_at) | reverse | .[0:1] | .[] | .assets[] | select(.content_type | contains("application/gzip")) | .browser_download_url')" && \
+    file="${url##*/}" && \
+    curl -LO "${url}"
+
+RUN tar -xzf ${file}
+
+WORKDIR ${file/.tar.gz/}
+
+RUN mkdir -p /usr/local/vitess && cp -r * /usr/local/vitess/
+
+ENV PATH="$PATH:/usr/local/vitess/bin"
+
+
+CMD ["/bin/bash"]

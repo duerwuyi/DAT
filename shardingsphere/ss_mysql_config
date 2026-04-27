@@ -1,0 +1,7 @@
+#shardingsphere_node_config
+#ip port user password
+host.docker.internal 3308 root root
+host.docker.internal 3309 root root
+host.docker.internal 3310 root root
+host.docker.internal 3311 root root
+host.docker.internal 3312 root root

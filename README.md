@@ -1,9 +1,10 @@
-# DistRanger: Distribution-Aware Distributed Database Testing
+# DistRanger: Distribution-Aware Testing for Distributed Databases
 
-DistRanger is a distributed database testing framework built on top of
-SQLsmith-style query generation and DDC testing. It compares a reference
-database instance with a distributed database deployment and reports crashes or
-logic mismatches found during generated SQL execution.
+Distribution-Aware Testing (DAT) is an approach that brings table-level distribution strategies into the DDBMS testing process. 
+DAT uses information about how tables are local, replicated, sharded, or co-located to guide SQL query generation and mutation. 
+By modeling these distribution strategies explicitly, DAT can generate executable yet diverse queries that exercise distributed query planning, optimization, and execution behavior.
+
+DistRanger is the implementation of DAT. It is designed to test distributed database management systems and uncover bugs specific to the distributed layer, including incorrect query results, crashes, unexpected errors, and unsupported execution patterns.
 
 ## Repository layout
 
@@ -11,9 +12,9 @@ logic mismatches found during generated SQL execution.
   an interactive container with the source tree mounted as a volume.
 - `compile.sh`: builds `distranger` from the existing `build` directory and
   copies the binary to the repository root.
-- `main/<dbms>/ddc_test.sh`: DBMS-specific test entry points. Each script calls
+- `main/<dbms>/dat_test.sh`: DBMS-specific DAT test entry points. Each script calls
   `compile.sh`, creates the DBMS `saved` directory, and runs `./distranger` with
-  the matching DDC config.
+  the matching DAT config.
 - `main/<dbms>/*_ddc_config.txt`: connection settings for the reference database
   and the distributed database under test.
 - `<dbms>/*_config`: extra runtime configuration consumed by DistRanger for
@@ -37,21 +38,21 @@ Build and enter the DistRanger Docker environment (recommended):
 Run a DBMS test from the repository root:
 
 ```bash
-bash main/citus/ddc_test.sh
+bash main/citus/dat_test.sh
 ```
 
 The test scripts follow this pattern:
 
 ```bash
-bash main/<dbms>/ddc_test.sh
+bash main/<dbms>/dat_test.sh
 ```
 
 Available test scripts:
 
-- `main/citus/ddc_test.sh`
-- `main/clickhouse/ddc_test.sh`
-- `main/shardingsphere/ddc_test.sh`
-- `main/vitess/ddc_test.sh`
+- `main/citus/dat_test.sh`
+- `main/clickhouse/dat_test.sh`
+- `main/shardingsphere/dat_test.sh`
+- `main/vitess/dat_test.sh`
 
 ## Common prerequisites
 
@@ -81,10 +82,10 @@ docker compose -f docker_compose.yml up -d
 Run DistRanger:
 
 ```bash
-bash main/citus/ddc_test.sh
+bash main/citus/dat_test.sh
 ```
 
-Main DDC config:
+Main DAT config:
 
 - `main/citus/citus_ddc_config.txt`
 - Reference PostgreSQL: `host.docker.internal:5432`
@@ -123,10 +124,10 @@ docker compose up -d
 Run DistRanger:
 
 ```bash
-bash main/clickhouse/ddc_test.sh
+bash main/clickhouse/dat_test.sh
 ```
 
-Main DDC config:
+Main DAT config:
 
 - `main/clickhouse/clickhouse_ddc_config.txt`
 - Reference ClickHouse: `host.docker.internal:9007`
@@ -157,10 +158,10 @@ docker compose up -d
 Run DistRanger:
 
 ```bash
-bash main/shardingsphere/ddc_test.sh
+bash main/shardingsphere/dat_test.sh
 ```
 
-Main DDC config:
+Main DAT config:
 
 - `main/shardingsphere/ss_ddc_config.txt`
 - Reference PostgreSQL: `host.docker.internal:5432`
@@ -208,10 +209,10 @@ sh pf-sharded.sh
 Run DistRanger:
 
 ```bash
-bash main/vitess/ddc_test.sh
+bash main/vitess/dat_test.sh
 ```
 
-Main DDC config:
+Main DAT config:
 
 - `main/vitess/vitess_ddc_config.txt`
 - Single Vitess keyspace `local`: `host.docker.internal:15306`

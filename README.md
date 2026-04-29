@@ -1,10 +1,12 @@
 # DistRanger: Distribution-Aware Testing for Distributed Databases
 
-Distribution-Aware Testing (DAT) is an approach that brings table-level distribution strategies into the DDBMS testing process. 
-DAT uses information about how tables are local, replicated, sharded, or co-located to guide SQL query generation and mutation. 
+Distribution-Aware Testing (DAT) is an approach that brings table-level distribution strategies into the DDBMS testing process.
+We realize DAT in an automated testing tool, DistRanger.
+
+DAT uses information about how table physically distribute their data (namely distribution strategies) to guide test case generation. 
 By modeling these distribution strategies explicitly, DAT can generate executable yet diverse queries that exercise distributed query planning, optimization, and execution behavior.
 
-DistRanger is the implementation of DAT. It is designed to test distributed database management systems and uncover bugs specific to the distributed layer, including incorrect query results, crashes, unexpected errors, and unsupported execution patterns.
+DistRanger is the implementation of DAT. It is designed to test distributed database management systems and uncover bugs specific to the distributed layer, including incorrect query results, crashes, unexpected errors, and timeouts bugs.
 
 ## Repository layout
 

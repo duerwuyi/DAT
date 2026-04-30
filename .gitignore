@@ -65,3 +65,8 @@ clickhouse_error
 clickhouse_sql
 !vitess/drop*.sql
 vitess/saved/*/*/*.json
+
+!docker/
+!docker/**/
+!docker/**/*.xml
+!docker/**/*.sql

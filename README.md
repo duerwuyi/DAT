@@ -1,13 +1,15 @@
 # Distribution-Aware Distributed Database Testing
 
-Distribution-Aware Testing (DAT) is a novel approach for testing distributed database management systems (DDBMSs) that systematically leverages distribution-aware information throughout the testing pipeline. 
+Distribution-Aware Testing (DAT) is a novel automated testing approach for distributed database management systems (DDBMSs) that systematically leverages distribution-aware information throughout the testing pipeline.
 
 DAT builds on a set of techniques that capture diverse combinations of logical schemas and data distribution strategies, 
 and performs guided query mutation to trigger a wide range of distributed query execution behaviors and optimizations, while improving query executability via historical feedback.
 
-We implement DAT in this tool, DistRanger, and evaluate it on four production DDBMSs. 
-It is designed to test DDBMSs and uncover bugs specific to the distributed layer, including incorrect query results, crashes, unexpected errors, and timeouts bugs.
-DistRanger have uncovered 31 previously unknown bugs, including 28 distribution-specific ones.
+We implement DAT in a tool called DistRanger, and evaluate it on four widely used production DDBMSs: Citus, Vitess, Apache ShardingSphere, and ClickHouse.
+So far, DistRanger has uncovered 31 previously unknown bugs, including 28 distribution-specific ones whose manifestations or root
+causes are tied to distributed query processing and optimization. These bugs are of different types, including logic bugs (incorrect query results), crashes, errors, unexpected exceptions, and timeouts.
+
+This repository provides instructions on how to use Distranger. For technical details of DAT and Distranger, please refer to our technical report [tech-rpt.pdf]([https://your-link-here](https://github.com/duerwuyi/DAT/blob/main/tech-rpt.pdf)).
 
 ## Repository layout
 
